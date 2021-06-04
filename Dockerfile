@@ -11,6 +11,18 @@ FROM tensorflow/tensorflow:latest-gpu-jupyter
 
 ##################################################################################
 #
+#  wget and friends:
+#    need to install wget so we can actually build this stuff
+#
+##################################################################################
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
+    libglib2.0-0 libxext6 libsm6 libxrender1 \
+    git mercurial subversion && \
+    apt-get clean
+
+##################################################################################
+#
 #   MPI:
 #    We provide two different ways to install MPI, intended for Mox/Hyak with Singularity
 #    or NeRSC/Shifter respectively
